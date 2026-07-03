@@ -1,0 +1,18 @@
+{
+  "name": "Cotizador — Grupo Cometa",
+  "short_name": "Cotizador",
+  "description": "Generador de cotizaciones en PDF y Excel para Grupo Cometa.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f4f4f5",
+  "theme_color": "#D6001C",
+  "lang": "es",
+  "dir": "ltr",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

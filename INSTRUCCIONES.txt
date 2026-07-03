@@ -1,0 +1,54 @@
+COTIZADOR — GRUPO COMETA  (App / PWA)
+=====================================
+
+Esta carpeta es la aplicación completa. Funciona SIN INTERNET
+(las librerías ya vienen incluidas). No requiere instalar nada
+como Node ni permisos de administrador.
+
+
+OPCIÓN 1 — USARLA YA (sin instalar)
+-----------------------------------
+1. Descomprime toda la carpeta en tu PC (mantén todos los archivos juntos).
+2. Haz doble clic en "index.html".
+Se abre en tu navegador y funciona igual, sin internet.
+(Consejo: puedes anclar la pestaña o crear un acceso directo en el escritorio.)
+
+
+OPCIÓN 2 — INSTALARLA COMO APP (ícono + ventana propia)
+-------------------------------------------------------
+Para que quede como una app de verdad (ícono en el escritorio o el
+celular, ventana propia, funciona offline), los archivos deben estar
+en un enlace https. Elige el que puedas usar:
+
+  A) Sitio interno de tu empresa / IIS / SharePoint (pídelo a IT), o
+  B) Un hosting estático gratis: GitHub Pages, Cloudflare Pages, Netlify.
+     - Creas el sitio, subes TODOS los archivos de esta carpeta,
+       y te da un enlace https.
+
+Ya con el enlace https:
+
+  EN COMPUTADORA (Edge o Chrome):
+   1. Abre el enlace.
+   2. En la barra de direcciones aparece un ícono de "Instalar"
+      (o menú ⋯  →  Aplicaciones  →  "Instalar este sitio como aplicación").
+   3. Confirma. Queda un ícono en el escritorio y se abre en su
+      propia ventana. Después funciona sin internet.
+
+  EN CELULAR:
+   - Android (Chrome): abre el enlace  →  menú ⋯  →  "Instalar app"
+     / "Agregar a pantalla de inicio".
+   - iPhone (Safari): abre el enlace  →  botón Compartir  →
+     "Agregar a inicio".
+
+
+CONTENIDO DE LA CARPETA (no borres nada)
+----------------------------------------
+  index.html            La app
+  exceljs.min.js        Genera el Excel
+  jspdf.umd.min.js      Genera el PDF
+  manifest.json         Datos de la app (nombre, ícono)
+  sw.js                 Permite que funcione sin internet
+  icon-*.png            Íconos de la app
+
+
+Cualquier ajuste (logo, textos, columnas), se puede seguir modificando.
