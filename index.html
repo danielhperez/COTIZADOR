@@ -461,9 +461,16 @@ function buildCotizacionPDF(doc, data, logoPng){
     {t:'Precio', x:140, w:28, a:'right'},
     {t:'Total', x:168, w:28, a:'right'},
   ];
-  const tTop=72, hH=9, rowH=7;
+  const tTop=72, hH=9, minRowH=7.5, lineH=4.4;
   const rows = data.lines.map(l=>({l, k:calcL(l)})).filter(o=>o.k.total>0 || o.l.codigo || o.l.descripcion);
-  const bodyH = Math.max(rows.length*rowH + 6, 85);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  const rowInfos = rows.map(({l,k})=>{
+    const desc = doc.splitTextToSize(l.descripcion||'', 74);
+    const h = Math.max(minRowH, desc.length*lineH + 3);
+    return {l,k,desc,h};
+  });
+  const contentH = rowInfos.reduce((s,ri)=>s+ri.h, 0);
+  const bodyH = Math.max(contentH + 4, 85);
   const tBot = tTop+hH+bodyH, rad=3;
   doc.setDrawColor(...LINE); doc.setLineWidth(0.4);
   doc.roundedRect(L, tTop, W, hH+bodyH, rad, rad);
@@ -480,15 +487,15 @@ function buildCotizacionPDF(doc, data, logoPng){
   });
   doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...INK);
   let ry=tTop+hH;
-  rows.forEach(({l,k})=>{
-    const cy2=ry+rowH/2+1.2;
-    doc.text(String(k.c), 14+10, cy2, {align:'center'});
-    doc.text(l.codigo||'', 36, cy2);
-    const desc = doc.splitTextToSize(l.descripcion||'', 74);
-    doc.text(desc[0]||'', 64, cy2);
-    doc.text(fmt(k.unit), 166, cy2, {align:'right'});
-    doc.text(fmt(k.total), 194, cy2, {align:'right'});
-    ry+=rowH;
+  rowInfos.forEach(({l,k,desc,h})=>{
+    const midY = ry + h/2 + 1.3;
+    doc.text(String(k.c), 24, midY, {align:'center'});
+    doc.text(l.codigo||'', 36, midY);
+    const first = ry + h/2 - ((desc.length-1)*lineH)/2 + 1.3;
+    desc.forEach((ln,i)=>doc.text(ln, 64, first + i*lineH));
+    doc.text(fmt(k.unit), 166, midY, {align:'right'});
+    doc.text(fmt(k.total), 194, midY, {align:'right'});
+    ry+=h;
   });
   let sub=0; rows.forEach(o=>sub+=o.k.total);
   const itbis=sub*ITBIS, total=sub+itbis;
